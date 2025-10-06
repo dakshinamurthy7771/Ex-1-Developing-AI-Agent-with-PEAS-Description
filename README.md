@@ -1,8 +1,8 @@
 # Ex-1-Developing-AI-Agent-with-PEAS-Description
-### Name:
+### Name:Dakshina murthy.V
 
 ### Register Number:
-
+2305001006
 ### Aim:
 To find the PEAS description for the given AI problem and develop an AI agent.
 
@@ -35,87 +35,52 @@ It’s a framework used to define the task environment for an AI agent clearly.
 5. Personal assistant (like Siri or Alexa)
 ```
 
-### VacuumCleanerAgent
+### Email spam filter
 ### Algorithm:
-Step 1: Initialize:
+Step 1: Define a list of spam keywords (e.g., “lottery”, “win money”, “free”, “click here”).
 
-Set agent’s location to A
+Step 2: Take incoming email text as input.
 
-Set environment dirt status for locations A and B (True = dirty, False = clean)
+Step 3: Scan for presence of spam keywords.
 
-Step 2 :Repeat until all locations are clean (no dirt):
-a. Sense if current location has dirt
-b. If current location has dirt:
-- Suck dirt (set dirt status at current location to False)
-c. Else:
-- If current location is A, move right to location B
-- Else if current location is B, move left to location A
-d. Print the agent’s current location and dirt status (optional for debugging)
+Step 4: If spam keywords found → classify as SPAM, else classify as NOT SPAM.
 
-Step 3: Stop when all locations are clean
-
-Step 4: Print total steps taken (optional)
+Step 5: Print result for each email.
 
 ### Program:
 ```
-class VacuumCleanerAgent:
+class SpamFilterAgent:
     def __init__(self):
-        # Initialize the agent's state (location and dirt status)
-        self.location = "A"  # Initial location (can be "A" or "B")
-        self.dirt_status = {"A": False, "B": False}  # Initial dirt status (False means no dirt)
+        # Simple spam keywords list
+        self.spam_keywords = ["lottery", "win money", "free", "offer", "click here", "prize", "urgent"]
 
-    def move_left(self):
-        # Move the agent to the left if possible
-        if self.location == "B":
-            self.location = "A"
-
-    def move_right(self):
-        # Move the agent to the right if possible
-        if self.location == "A":
-            self.location = "B"
-
-    def suck_dirt(self):
-        # Suck dirt in the current location if there is dirt
-        if self.dirt_status[self.location]:
-            self.dirt_status[self.location] = False
-            print(f"Sucked dirt in location {self.location}")
-
-    def do_nothing(self):
-        # Do nothing
-        pass
-
-    def perform_action(self, action):
-        # Perform the specified action
-        if action == "left":
-            self.move_left()
-        elif action == "right":
-            self.move_right()
-        elif action == "suck":
-            self.suck_dirt()
-        elif action == "nothing":
-            self.do_nothing()
-        else:
-            print("Invalid action")
-
-    def print_status(self):
-        # Print the current status of the agent
-        print(f"Location: {self.location}, Dirt Status: {self.dirt_status}")
-
-# Example usage:
-agent = VacuumCleanerAgent()
+    def classify_email(self, email_text):
+        # Check if any spam keyword exists in the email
+        for keyword in self.spam_keywords:
+            if keyword.lower() in email_text.lower():
+                return "SPAM"
+        return "NOT SPAM"
 
 
-# Move the agent, suck dirt, and do nothing
+# Example usage
+agent = SpamFilterAgent()
 
-agent.perform_action("left")
-agent.print_status()
-agent.perform_action("suck")
-agent.print_status()
-agent.perform_action("nothing")
-agent.print_status()
+emails = [
+    "Congratulations! You have won a lottery. Click here to claim your prize.",
+    "Dear user, your account statement is attached for reference.",
+    "Urgent offer!!! Win money now by signing up for free.",
+    "Meeting scheduled tomorrow at 10 AM. Please attend on time."
+]
+
+for i, email in enumerate(emails, start=1):
+    result = agent.classify_email(email)
+    print(f"Email {i}: {result}")
+
 ```
 ### Sample Output:
 
-425810495-d1198ba7-da19-413b-9907-4844afae627f
+<img width="322" height="102" alt="Screenshot 2025-10-06 140051" src="https://github.com/user-attachments/assets/e5f39369-7a05-43d0-9268-dbbd61920c4e" />
+
 
 ### Result:
+The Email Spam Filter Agent was successfully developed using the PEAS framework. The agent scans emails for spam-related keywords and classifies them as SPAM or NOT SPAM, demonstrating how AI can be applied to filtering problems.
